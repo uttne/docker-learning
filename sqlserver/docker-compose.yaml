@@ -1,0 +1,9 @@
+version: '3'
+services: 
+    salserver:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports: 
+            - 31433:1433
+        environment: 
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=SqlP@ssw0rd
