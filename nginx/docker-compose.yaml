@@ -1,0 +1,12 @@
+version: '3'
+services: 
+    salserver:
+        image: nginx:latest
+        ports: 
+            - 8081:80
+        networks: 
+            - default
+            - sample_network
+networks: 
+    sample_network:
+        external: true
