@@ -1,0 +1,13 @@
+# https://hub.docker.com/r/jpillora/dnsmasq
+version: '3'
+services: 
+    dnsmasq:
+        build: .
+        environment: 
+            - HTTP_USER=foo
+            - HTTP_PASS=bar
+        restart: always
+        ports: 
+            - 53:53/udp
+            - 5380:8080
+        container_name: dnsmasq_sample
