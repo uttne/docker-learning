@@ -1,0 +1,47 @@
+version: '3'
+services: 
+    gitea:
+        image: gitea/gitea:latest
+        container_name: gitea_container
+        volumes: 
+            - gitea_data:/data
+        ports: 
+            - 3001:3001
+        environment: 
+            - USER_UID=1000
+            - USER_GID=1000
+            - TZ=Japan
+            - SSH_PORT=10022
+            - DB_TYPE=postgres
+            - DB_HOST=gitea_postgres_container:5432
+            - DB_NAME=gitea
+            - DB_USER=gitea
+            - DB_PASSWD=gitea
+            - HTTP_PORT=3001
+            - ROOT_URL=http://gitea.company/
+        restart: always
+        networks: 
+            - default
+            - sample_network
+        depends_on: 
+            - postgres
+    postgres:
+        image: postgres:9.6
+        container_name: gitea_postgres_container
+        restart: always
+        environment: 
+            - POSTGRES_USER=gitea
+            - POSTGRES_PASSWORD=gitea
+            - POSTGRES_DB=gitea
+        networks: 
+            - default
+            - sample_network
+        volumes: 
+            - gitea_postgres_data:/var/lib/postgresql/data
+
+volumes: 
+    gitea_data:
+    gitea_postgres_data:
+networks: 
+    sample_network:
+        external: true
