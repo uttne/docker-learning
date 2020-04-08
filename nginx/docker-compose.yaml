@@ -1,9 +1,11 @@
 version: '3'
 services: 
     salserver:
-        image: nginx:latest
+        build: 
+            context: .
+        container_name: nginx_container
         ports: 
-            - 8081:80
+            - 80:80
         networks: 
             - default
             - sample_network
