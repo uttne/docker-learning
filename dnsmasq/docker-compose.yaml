@@ -2,12 +2,17 @@
 version: '3'
 services: 
     dnsmasq:
-        build: .
+        build: 
+            context: .
+            args: 
+                - SERVER_ADDR=${DNSMASQ_SERVER_ADDR}
         environment: 
             - HTTP_USER=foo
             - HTTP_PASS=bar
         restart: always
         ports: 
             - 53:53/udp
+            - 53:53/tcp
             - 5380:8080
         container_name: dnsmasq_sample
+            
